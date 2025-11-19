@@ -1,28 +1,37 @@
 {
-  "name": "24-7-store",
-  "version": "1.0.0",
-  "description": "E-commerce web application for a convenience store",
+  "name": "mine",
   "private": true,
+  "version": "1.0.0",
+  "main": "package.json",
+  "license": "UNLICENSED",
   "scripts": {
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run dev",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "build": "npm run build:frontend && npm run build:backend"
+    "dev": "sanity dev",
+    "start": "sanity start",
+    "build": "sanity build",
+    "deploy": "sanity deploy",
+    "deploy-graphql": "sanity graphql deploy"
   },
   "keywords": [
-    "ecommerce",
-    "convenience-store",
-    "react",
-    "express",
-    "supabase",
     "sanity"
   ],
-  "author": "",
-  "license": "MIT",
+  "dependencies": {
+    "@sanity/vision": "^4.16.0",
+    "react": "^19.1",
+    "react-dom": "^19.1",
+    "sanity": "^4.16.0",
+    "styled-components": "^6.1.18"
+  },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "@sanity/eslint-config-studio": "^5.0.2",
+    "@types/react": "^19.1",
+    "eslint": "^9.28",
+    "prettier": "^3.5",
+    "typescript": "^5.8"
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 100,
+    "bracketSpacing": false,
+    "singleQuote": true
   }
 }
