@@ -1,5 +1,5 @@
 [build]
-  command = "cd frontend && npm install && npm run build && cd ../sanity-studio && npm install && npx sanity dataset import seed-data.ndjson production --replace && npm run build && sed -i.bak 's|href=\"/static/|href=\"/studio/static/|g' dist/index.html && sed -i.bak 's|src=\"/static/|src=\"/studio/static/|g' dist/index.html && sed -i.bak 's|\"/vendor/|\"/studio/vendor/|g' dist/index.html && rm dist/index.html.bak && mv dist ../frontend/dist/studio"
+  command = "cd frontend && npm install && npm run build && cd ../sanity-studio && npm install && SANITY_AUTH_TOKEN=$SANITY_AUTH_TOKEN npx sanity dataset import seed-data.ndjson production --replace && npm run build && sed -i.bak 's|href=\"/static/|href=\"/studio/static/|g' dist/index.html && sed -i.bak 's|src=\"/static/|src=\"/studio/static/|g' dist/index.html && sed -i.bak 's|\"/vendor/|\"/studio/vendor/|g' dist/index.html && rm dist/index.html.bak && mv dist ../frontend/dist/studio"
   publish = "frontend/dist"
 
 [build.environment]
@@ -9,6 +9,7 @@
   VITE_SANITY_API_VERSION = "2024-01-01"
   VITE_PUBLIC_POSTHOG_KEY = "phc_nc7Nv2MZADJ5lIKm4PHyrydowoIJL6mTrcDgizJJaVN"
   VITE_PUBLIC_POSTHOG_HOST = "https://us.i.posthog.com"
+  SANITY_AUTH_TOKEN = "skqJ81e3Bn0JUsTkJISnIwkokQo5aFQI6FI1NcaPWzsKCI7RggjN75TBXpEx3XhXmasjwrvlnZfgD0vBiC20uDzS80cNOzuEb7xpzuYNRs91Tn5PPjrgfyobaEyiV3ThUKjItRZ28hDDMCu66k0BvVJyMz7L0uRzbjXJwQF4UTK32rAISMvC"
 
 [[redirects]]
   from = "/studio/*"
