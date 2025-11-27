@@ -2,7 +2,7 @@
 title: "Hugging Face"
 ---
 
-Hugging Face is the main platform for sharing open AI models. It provides inference in two ways. [Inference Providers](https://huggingface.co/docs/inference-providers/index) and [Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index).
+Hugging Face is the main platform for sharing open AI models. It provides inference in two ways: [Inference Providers](https://huggingface.co/docs/inference-providers/index) and [Inference Endpoints](https://huggingface.co/docs/inference-endpoints/index).
 
 ## Inference Providers
 
@@ -19,7 +19,7 @@ You can access your access token from [Hugging Face](https://huggingface.co/sett
   ```yaml title="config.yaml"
   models:
     - name: deepseek
-      provider: huggingface-inference-providers
+      provider: huggingface-inference-api
       model: deepseek-ai/DeepSeek-V3.2-Exp
       apiKey: <YOUR_HF_TOKEN>
       apiBase: https://router.huggingface.co/v1
@@ -44,11 +44,11 @@ You can access your access token from [Hugging Face](https://huggingface.co/sett
 
 ## Inference Endpoints
 
-Inference Endpoints is a dedicated service that allows you to run your open models dedicated hardware. It is a more advanced way to get inference from Hugging Face models where you have more control over the whole process.
+Inference Endpoints is a dedicated service that allows you to run your open models on dedicated hardware. It is a more advanced way to get inference from Hugging Face models where you have more control over the whole process.
 
 <Info>
 
-Before you can use Inference Endpoints, you need to create an endpoint. You can do this by going to [Inference Endpoints](https://endpoints.huggingface.co/burtenshaw/endpoints/dedicated) and clicking on "Create Endpoint".
+Before you can use Inference Endpoints, you need to create an endpoint. You can do this by going to [Inference Endpoints](https://ui.endpoints.huggingface.co) and clicking on "Create Endpoint".
 
 </Info>
 
@@ -57,7 +57,7 @@ Before you can use Inference Endpoints, you need to create an endpoint. You can 
   ```yaml title="config.yaml"
   models:
     - name: deepseek
-      provider: huggingface-inference-endpoints
+      provider: huggingface-inference-api
       model: <ENDPOINT_ID>
       apiKey: <YOUR_HF_TOKEN>
       apiBase: https://<YOUR_ENDPOINT_ID>.aws.endpoints.huggingface.cloud
@@ -65,11 +65,11 @@ Before you can use Inference Endpoints, you need to create an endpoint. You can 
   </Tab>
   <Tab title="JSON (Deprecated)">
   ```json title="config.json"
-  {
+    {
     "models": [
       {
         "title": "deepseek",
-        "provider": "huggingface-inference-endpoints",
+        "provider": "huggingface-inference-api",
         "model": "<ENDPOINT_ID>",
         "apiKey": "<YOUR_HF_TOKEN>",
         "apiBase": "https://<YOUR_ENDPOINT_ID>.aws.endpoints.huggingface.cloud"
