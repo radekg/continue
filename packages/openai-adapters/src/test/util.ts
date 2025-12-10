@@ -75,12 +75,14 @@ export function testFim(api: BaseLlmApi, model: string) {
 }
 
 export function testChat(
-  api: BaseLlmApi,
+  api: BaseLlmApi | (() => BaseLlmApi),
   model: string,
   options?: TestConfigOptions,
 ) {
+  const getApi = () => (typeof api === "function" ? api() : api);
+
   test("should successfully stream chat", async () => {
-    const stream = api.chatCompletionStream(
+    const stream = getApi().chatCompletionStream(
       {
         model,
         messages: [{ role: "user", content: "Hello! Who are you?" }],
@@ -121,7 +123,7 @@ export function testChat(
   });
 
   test("should successfully stream multi-part chat with empty text", async () => {
-    const stream = api.chatCompletionStream(
+    const stream = getApi().chatCompletionStream(
       {
         model,
         messages: [
@@ -158,7 +160,7 @@ export function testChat(
   });
 
   test.skip("should successfully stream multi-part chat with image", async () => {
-    const stream = api.chatCompletionStream(
+    const stream = getApi().chatCompletionStream(
       {
         model,
         messages: [
@@ -193,7 +195,7 @@ export function testChat(
   });
 
   test("should successfully non-stream chat", async () => {
-    const response = await api.chatCompletionNonStream(
+    const response = await getApi().chatCompletionNonStream(
       {
         model,
         messages: [{ role: "user", content: "Hello! Who are you?" }],
@@ -228,7 +230,7 @@ export function testChat(
 
   test("should acknowledge system message in chat", async () => {
     if (options?.skipSystemMessage !== true) {
-      const response = await api.chatCompletionNonStream(
+      const response = await getApi().chatCompletionNonStream(
         {
           model,
           messages: [
@@ -255,7 +257,7 @@ export function testChat(
     test("Tool Call works", async () => {
       let args = "";
       let isFirstChunk = true;
-      for await (const chunk of api.chatCompletionStream(
+      for await (const chunk of getApi().chatCompletionStream(
         {
           messages: [
             {
@@ -318,7 +320,7 @@ export function testChat(
 
     test("Tool Call second message works", async () => {
       let response = "";
-      for await (const chunk of api.chatCompletionStream(
+      for await (const chunk of getApi().chatCompletionStream(
         {
           messages: [
             {
